@@ -4,6 +4,8 @@ public class Ticket {
 	private Passenger passenger;
 	private Flight flight;
 	private String ticketID;
+	private String seatNo;
+	
 	public Ticket(Passenger passenger, Flight flight) {
 		super();
 		this.passenger = passenger;

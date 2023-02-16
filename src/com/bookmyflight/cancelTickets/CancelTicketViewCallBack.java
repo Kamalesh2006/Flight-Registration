@@ -8,4 +8,8 @@ public interface CancelTicketViewCallBack {
 
 	void bookedTickets(List<Ticket> ticketList);
 
+	void callBackToManageTicket();
+
+	void noTicketsBooked(String string);
+
 }

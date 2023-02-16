@@ -24,9 +24,9 @@ public class FlightDB {
 		flightsTable.add(new Flight("AirAsia-001", "Chennai", "NewDelhi", "03:00pm", "06:30pm", "3:30", 21600,
 				"01/03/2023", 160));
 		flightsTable.add(new Flight("IndiGo-6E-6012", "Bengaluru", "Chennai", "06:00am", "7:00am", "1:00", 7000,
-				"02/03/2023", 200));
+				"02/03/2023", 60));
 		flightsTable.add(new Flight("Vistara-UK-866", "Chennai", "Dubai", "7:00pm", "01:00am", "6:00", 33000,
-				"01/03/2023", 280));
+				"01/03/2023", 80));
 
 	}
 
@@ -85,6 +85,11 @@ public class FlightDB {
 
 	public List<Ticket> getTickets() {
 		return ticketTable;
+	}
+
+	public void deleteTicket(Ticket ticket) {
+		ticket.getFlight().setSeatCapacity(ticket.getFlight().getSeatCapacity()+1);
+		ticketTable.remove(ticket);
 	}
 
 }

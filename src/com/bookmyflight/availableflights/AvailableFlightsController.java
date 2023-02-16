@@ -19,15 +19,17 @@ public class AvailableFlightsController implements AvailableFlightsControllerCal
 			availableFlightsModel.availableFlightsInDB();
 			break;
 		case 2:
-			showAvailableDestination();
+			availableFlightsModel.availableFlightsDestination();
 			break;
+		case 3:
+			availableFlightsView.callBackToManageTicket();
 		}
 	}
 	@Override
 	public void retrievedFlightsData(List<Flight> allFlights) {
 		String result ="-----------------------------------------------------";
 		for(Flight f:allFlights) {
-			result = result + "\n"+ f.getDate()+" "+f.getFlightNo()+" from "+f.getOrigin()+" destination "+f.getDestination()+" Dtime "+f.getDepartureTime()+" Atime "+f.getArrivalTime()+" "+f.getDuration()+" available Seats "+f.getSeatCapacity();	
+			result = result + "\n"+ f.getDate()+" "+f.getFlightNo()+" from "+f.getOrigin()+" destination "+f.getDestination()+" Dtime "+f.getDepartureTime()+" Atime "+f.getArrivalTime()+"\n "+f.getDuration()+" available Seats "+f.getSeatCapacity();	
 		}
 		availableFlightsView.retrievedFlightsDetails(result);
 	}

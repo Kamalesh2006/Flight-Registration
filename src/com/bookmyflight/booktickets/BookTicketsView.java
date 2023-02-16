@@ -8,15 +8,18 @@ import com.bookmyflight.availableflights.AvailableFlightsView;
 import com.bookmyflight.dto.Flight;
 import com.bookmyflight.dto.Passenger;
 import com.bookmyflight.dto.Ticket;
+import com.bookmyflight.managetickets.ManageTicketView;
 
 public class BookTicketsView implements BookTicketsViewCallBack {
 	private Scanner scanner = new Scanner(System.in);
 	private BookTicketsControllerCallBack bookTicketsController;
+	private ManageTicketView manageTicketView;
 	public BookTicketsView() {
 		bookTicketsController = new BookTicketsController(this);
 	}
 
-	public void selectFlightToBook() {
+	public void selectFlightToBook(ManageTicketView manageTicketView) {
+		this.manageTicketView=manageTicketView;
 		System.out.println("Enter your journey date:");
 		String date = scanner.next();
 		System.out.println("Enter your departure city");
@@ -30,11 +33,13 @@ public class BookTicketsView implements BookTicketsViewCallBack {
 	public void printFlights(List<Flight> flights) {
 		int sno = 1;
 		for (Flight f : flights) {
-			System.out.println(sno + " " + f.getFlightNo() + " " + f.getDate() + " " + f.getOrigin() + " "
-					+ f.getDestination() + " " + f.getSeatCapacity());
+			System.out.println("Press "+sno + " to book " + f.getFlightNo() + " " + f.getDate() + " " + f.getOrigin() + " "
+					+ f.getDestination() + " available seats " + f.getSeatCapacity()+" in which economy class are "+f.getEconomySeatCount());
 			sno++;
+			System.out.println("Press "+sno + " to book " + f.getFlightNo() + " " + f.getDate() + " " + f.getOrigin() + " "
+					+ f.getDestination() + " available seats " + f.getSeatCapacity()+" in which economy class are "+f.getBusinessSeatCount());
 		}
-		System.out.println("Press " + (flights.size() + 1) + " to go back");
+		System.out.println("Press " + ((flights.size()*2) + 1) + " to go back");
 		System.out.println("Press corresponding number to book ticket");
 		int option = scanner.nextInt();
 		bookTicketsController.selectedFlight(option, flights);
@@ -42,10 +47,10 @@ public class BookTicketsView implements BookTicketsViewCallBack {
 
 	@Override
 	public void bookFlight(Flight flight) {
+		System.out.println("You have chosen " + flight.getFlightNo() + " available seats" + flight.getSeatCapacity());
 		List<Passenger> passengerList = new ArrayList<>();
 		System.out.println("Enter no of passengers you want to add:");
 		int size = scanner.nextInt();
-		System.out.println("You have chosen " + flight.getFlightNo() + " available seats" + flight.getSeatCapacity());
 		while (size>0) {
 			System.out.println("Enter passenger name:");
 			String name = scanner.next();
@@ -66,15 +71,20 @@ public class BookTicketsView implements BookTicketsViewCallBack {
 	@Override
 	public void flightsEmpty(String error) {
 		System.out.println(error);
-		selectFlightToBook();
+		selectFlightToBook(manageTicketView);
 	}
 
 	@Override
 	public void ticketBookedSuccessfully(List<Ticket> ticketList) {
 		System.out.println("Booked Tickets are ");
 		for(Ticket ticket: ticketList) {
-			System.out.println(ticket.getTicketID()+" Ticket ID booked for "+ticket.getPassenger().getEmail()+" in flight "+ticket.getFlight().getFlightNo()+" and your boarding date is "+ticket.getFlight().getDate());
+			System.out.println("Ticket ID "+ticket.getTicketID()+" booked in flight "+ticket.getFlight().getFlightNo()+" and boarding date is "+ticket.getFlight().getDate());
 		}
-		selectFlightToBook();
+		callBackToManageTicket();
+	}
+
+	@Override
+	public void callBackToManageTicket() {
+		manageTicketView.bookTickets();
 	}
 }

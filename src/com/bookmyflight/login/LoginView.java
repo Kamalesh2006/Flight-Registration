@@ -27,7 +27,7 @@ public class LoginView implements LoginViewCallBack{
 	public void userLoginSuccessfull() {
 		// user can book and manage tickets
 		System.out.println("User login successfull");
-		ManageTicketView manageTicket = new ManageTicketView()
+		ManageTicketView manageTicket = new ManageTicketView();
 		manageTicket.bookTickets();
 	}
 	@Override

@@ -9,8 +9,11 @@ public class Flight {
 	private String duration;
 	private int price;
 	private String date;
+	private int[] seats;
 	private int seatCapacity;
-
+	private int economySeatCount;
+	private int businessSeatCount;
+	
 	public Flight(String flightNo, String origin, String destination, String departureTime, String arrivalTime,
 			String duration, int price, String date, int seatCapacity) {
 		super();
@@ -23,6 +26,9 @@ public class Flight {
 		this.price = price;
 		this.date = date;
 		this.seatCapacity = seatCapacity;
+		setSeats(new int[seatCapacity]);
+		this.businessSeatCount = seatCapacity/3;
+		economySeatCount = (seatCapacity-businessSeatCount);
 	}
 
 	public String getFlightNo() {
@@ -96,4 +102,27 @@ public class Flight {
 	public void setSeatCapacity(int seatCapacity) {
 		this.seatCapacity = seatCapacity;
 	}
+
+	public int[] getSeats() {
+		return seats;
+	}
+
+	public void setSeats(int[] seats) {
+		this.seats = seats;
+	}
+	public int getEconomySeatCount() {
+		return economySeatCount;
+	}
+
+	public void setEconomySeatCount(int economySeatCount) {
+		this.economySeatCount = economySeatCount;
+	}
+	public int getBusinessSeatCount() {
+		return businessSeatCount;
+	}
+
+	public void setBusinessSeatCount(int businessSeatCount) {
+		this.businessSeatCount = businessSeatCount;
+	}
+
 }

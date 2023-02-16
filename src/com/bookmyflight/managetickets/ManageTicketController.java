@@ -11,10 +11,12 @@ public class ManageTicketController implements ManageTicketControllerCallBack,Ma
 	public void decideOptions(int optionChosen) {
 		switch(optionChosen) {
 		case 1:
-			manageTicketView.bookTicket();
+			manageTicketView.callBackToBookTicket();
 			break;
 		case 2:
 			manageTicketView.cancelTickets();
+		case 3: 
+			manageTicketView.showAvailableFlights();
 		}
 	}
 	@Override

@@ -9,4 +9,6 @@ public interface AvailableFlightsViewCallBack {
 
 	void showDestination(Set<String> destinationCollections);
 
+	void callBackToManageTicket();
+
 }

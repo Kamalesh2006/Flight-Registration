@@ -33,8 +33,8 @@ public class BookTicketsController implements BookTicketsControllerCallBack,Book
 	}
 	@Override
 	public void selectedFlight(int option, List<Flight> flights) {
-		if(option==flights.size()+1) {
-			
+		if(option==(flights.size()*2)+1) {
+			bookTicketsView.callBackToManageTicket();
 		}
 		bookTicketsView.bookFlight(flights.get(option-1));
 	}

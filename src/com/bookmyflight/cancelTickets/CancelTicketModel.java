@@ -16,5 +16,9 @@ public class CancelTicketModel implements CancelTicketModelCallBack {
 		List<Ticket> ticketList = flightInstance.getTickets();
 		cancelTicketController.retrievedBookedTickets(ticketList);
 	}
+	@Override
+	public void cancelTicket(Ticket ticket) {
+		flightInstance.deleteTicket(ticket);
+	}
 
 }
