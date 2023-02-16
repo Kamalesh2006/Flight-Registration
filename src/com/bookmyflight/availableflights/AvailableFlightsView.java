@@ -14,6 +14,7 @@ public class AvailableFlightsView implements AvailableFlightsViewCallBack {
 	public void showAvailableFlights() {
 		System.out.println("Press 1 to see Full flight details");
 		System.out.println("Press 2 to see Available destination");
+		System.out.println("Press 3 to book flights");
 		int option = scanner.nextInt();
 		availableFlightsController.showFlights(option);
 	}
@@ -27,5 +28,6 @@ public class AvailableFlightsView implements AvailableFlightsViewCallBack {
 		for(String destination: destinationCollections) {
 			System.out.println(destination);
 		}
+		showAvailableFlights();
 	}
 }

@@ -31,7 +31,15 @@ public class FlightDB {
 	public Set<String> getDestinationInDB() {
 		Set<String> result=new HashSet<>();
 		for(Flight f:flightsDB) {
-			result.add(f.getDepartureTime());
+			result.add(f.getDestination());
+		}
+		return result;
+	}
+	public List<Flight> getFlightsOnDate(String departureCity, String destinationCity, String date) {
+		List<Flight> result = new ArrayList<>();
+		for(Flight f:flightsDB) {
+			if(f.getArrivalTime().equals(date) && f.getDestination().equals(destinationCity) && f.getOrigin().equals(departureCity))
+				result.add(f);
 		}
 		return result;
 	}
