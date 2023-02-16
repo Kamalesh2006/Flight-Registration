@@ -1,9 +1,11 @@
 package com.bookmyflight.booktickets;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.bookmyflight.dto.Flight;
 import com.bookmyflight.dto.Passenger;
+import com.bookmyflight.dto.Ticket;
 
 public class BookTicketsController implements BookTicketsControllerCallBack,BookTicketsModelControllerCallBack{
 	private BookTicketsViewCallBack bookTicketsView;
@@ -37,13 +39,18 @@ public class BookTicketsController implements BookTicketsControllerCallBack,Book
 		bookTicketsView.bookFlight(flights.get(option-1));
 	}
 	@Override
-	public void passengerAddedSuccessfully(String email) {
-		bookTicketsView.passengerAddedSuccessfull(email);
+	public void addPassengersDetails(List<Passenger> passengerList,Flight flight) {
+		List<Ticket> ticketList = new ArrayList<>();
+		for(Passenger p:passengerList) {
+			ticketList.add(new Ticket(p,flight));
+			flight.setSeatCapacity(flight.getSeatCapacity()-1);
+		}
+		bookTicketsModel.bookFlightWithPassenger(ticketList);
 	}
 
 	@Override
-	public void addPassengersDetails(List<Passenger> passengerList,Flight flight) {
-		
+	public void ticketBookedSuccessfully(List<Ticket> ticketList) {
+		bookTicketsView.ticketBookedSuccessfully(ticketList);
 	}
 
 }

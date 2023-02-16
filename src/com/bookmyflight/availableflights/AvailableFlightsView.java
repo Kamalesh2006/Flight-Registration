@@ -4,10 +4,13 @@ package com.bookmyflight.availableflights;
 import java.util.Scanner;
 import java.util.Set;
 
+import com.bookmyflight.booktickets.BookTicketsView;
+
 
 public class AvailableFlightsView implements AvailableFlightsViewCallBack {
 	private Scanner scanner = new Scanner(System.in);
 	private AvailableFlightsControllerCallBack availableFlightsController;
+	
 	public AvailableFlightsView() {
 		this.availableFlightsController=new AvailableFlightsController(this);
 	}

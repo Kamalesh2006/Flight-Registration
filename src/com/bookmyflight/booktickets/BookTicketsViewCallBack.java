@@ -3,6 +3,7 @@ package com.bookmyflight.booktickets;
 import java.util.List;
 
 import com.bookmyflight.dto.Flight;
+import com.bookmyflight.dto.Ticket;
 
 public interface BookTicketsViewCallBack {
 	void selectFlightToBook();
@@ -13,6 +14,6 @@ public interface BookTicketsViewCallBack {
 
 	void flightsEmpty(String string);
 
-	void passengerAddedSuccessfull(String email);
+	void ticketBookedSuccessfully(List<Ticket> ticketList);
 
 }

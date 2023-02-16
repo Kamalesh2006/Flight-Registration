@@ -11,15 +11,16 @@ public class ManageTicketView implements ManageTicketViewCallBack{
 	public ManageTicketView(){
 		manageTicketController = new ManageTicketController(this);
 	}
-	public void bookTickets() {
+	void bookTickets() {
 		System.out.println("Enter 1 to book ticket");
 		System.out.println("Enter 2 to cancel booked tickets");
+		System.out.println("Enter 3 to exit application");
 		int optionChosen = scanner.nextInt();
 		manageTicketController.decideOptions(optionChosen);
 	}
 	@Override
 	public void cancelTickets() {
-		System.out.println("Showing Cancel Booked Tickets");
+		System.out.println("Cancel Booked Tickets");
 		//calling cancel ticket module
 		
 		

@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.bookmyflight.dto.Flight;
 import com.bookmyflight.dto.Passenger;
+import com.bookmyflight.dto.Ticket;
 import com.bookmyflight.dto.User;
 
 public class FlightDB {
@@ -14,7 +15,8 @@ public class FlightDB {
 	private List<Flight> flightsTable = new ArrayList<>();
 	private List<User> userTable = new ArrayList<>();
 	private List<Passenger> passengerTable = new ArrayList<>();
-
+	private List<Ticket> ticketTable = new ArrayList<>();
+	
 	private FlightDB() {
 		// default available flights in database
 		flightsTable.add(new Flight("Boeing-614", "Chennai", "bengaluru", "01:00pm", "02:00pm", "1:00", 8000,
@@ -75,6 +77,14 @@ public class FlightDB {
 
 	public void addPassenger(String name, int age, char gender, long phoneNo, String email) {
 		passengerTable.add(new Passenger(name, age, gender, email, phoneNo));
+	}
+
+	public void addTickets(List<Ticket> ticketList) {
+		ticketTable.addAll(ticketList);
+	}
+
+	public List<Ticket> getTickets() {
+		return ticketTable;
 	}
 
 }

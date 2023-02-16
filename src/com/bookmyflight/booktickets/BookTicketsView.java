@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.bookmyflight.availableflights.AvailableFlightsView;
 import com.bookmyflight.dto.Flight;
 import com.bookmyflight.dto.Passenger;
+import com.bookmyflight.dto.Ticket;
 
 public class BookTicketsView implements BookTicketsViewCallBack {
 	private Scanner scanner = new Scanner(System.in);
 	private BookTicketsControllerCallBack bookTicketsController;
-
 	public BookTicketsView() {
 		bookTicketsController = new BookTicketsController(this);
 	}
@@ -41,10 +42,11 @@ public class BookTicketsView implements BookTicketsViewCallBack {
 
 	@Override
 	public void bookFlight(Flight flight) {
-		boolean flag = true;
 		List<Passenger> passengerList = new ArrayList<>();
+		System.out.println("Enter no of passengers you want to add:");
+		int size = scanner.nextInt();
 		System.out.println("You have chosen " + flight.getFlightNo() + " available seats" + flight.getSeatCapacity());
-		while (flag) {
+		while (size>0) {
 			System.out.println("Enter passenger name:");
 			String name = scanner.next();
 			System.out.println("Enter the age of the passenger:");
@@ -56,8 +58,7 @@ public class BookTicketsView implements BookTicketsViewCallBack {
 			System.out.println("Enter the phone number of the passenger:");
 			long phoneNo = scanner.nextLong();
 			passengerList.add(new Passenger(name, age, gender, email, phoneNo));
-			System.out.println("Do you want another passenger: (True/False)");
-			flag = scanner.nextBoolean();
+			size--;
 		}
 		bookTicketsController.addPassengersDetails(passengerList,flight);
 	}
@@ -69,7 +70,11 @@ public class BookTicketsView implements BookTicketsViewCallBack {
 	}
 
 	@Override
-	public void passengerAddedSuccessfull(String email) {
-		System.out.println();
+	public void ticketBookedSuccessfully(List<Ticket> ticketList) {
+		System.out.println("Booked Tickets are ");
+		for(Ticket ticket: ticketList) {
+			System.out.println(ticket.getTicketID()+" Ticket ID booked for "+ticket.getPassenger().getEmail()+" in flight "+ticket.getFlight().getFlightNo()+" and your boarding date is "+ticket.getFlight().getDate());
+		}
+		selectFlightToBook();
 	}
 }
