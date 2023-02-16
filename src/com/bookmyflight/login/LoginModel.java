@@ -1,10 +1,10 @@
 package com.bookmyflight.login;
 
-import com.bookmyflight.repository.UserDB;
+import com.bookmyflight.repository.FlightDB;
 
 public class LoginModel implements LoginModelCallBack{
 	private LoginModelControllerCallBack loginController;
-	private UserDB userDbInstance = UserDB.getInstance();
+	private FlightDB userDbInstance = FlightDB.getInstance();
 	public LoginModel(LoginModelControllerCallBack loginController) {
 		this.loginController = loginController;
 	}

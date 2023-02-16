@@ -3,6 +3,7 @@ package com.bookmyflight.managetickets;
 import java.util.Scanner;
 
 import com.bookmyflight.availableflights.AvailableFlightsView;
+import com.bookmyflight.booktickets.BookTicketsView;
 
 public class ManageTicketView implements ManageTicketViewCallBack{
 	private Scanner scanner = new Scanner(System.in);
@@ -32,5 +33,9 @@ public class ManageTicketView implements ManageTicketViewCallBack{
 		System.out.println("Showing Available flights");
 		//calling available flights module
 		new AvailableFlightsView().showAvailableFlights();
+	}
+	@Override
+	public void bookTicket() {
+		new BookTicketsView().selectFlightToBook();
 	}
 }

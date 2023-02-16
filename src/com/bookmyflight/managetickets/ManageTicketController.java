@@ -9,8 +9,13 @@ public class ManageTicketController implements ManageTicketControllerCallBack,Ma
 	}
 	@Override
 	public void decideOptions(int optionChosen) {
-		manageTicketModel.decideOptionsInDB(optionChosen);
-		
+		switch(optionChosen) {
+		case 1:
+			manageTicketView.bookTicket();
+			break;
+		case 2:
+			manageTicketView.cancelTickets();
+		}
 	}
 	@Override
 	public void chosenBookTickets() {

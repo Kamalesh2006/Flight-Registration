@@ -9,4 +9,6 @@ public interface ManageTicketViewCallBack {
 
 	void showAvailableFlights();
 
+	void bookTicket();
+
 }

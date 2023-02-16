@@ -8,4 +8,6 @@ public interface BookTicketsModelControllerCallBack {
 
 	void flightsOnDate(List<Flight> result);
 
+	void passengerAddedSuccessfully(String email);
+
 }

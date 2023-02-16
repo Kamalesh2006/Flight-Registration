@@ -1,10 +1,10 @@
 package com.bookmyflight.signup;
 
-import com.bookmyflight.repository.UserDB;
+import com.bookmyflight.repository.FlightDB;
 
 public class SignUpModel implements SignUpModelCallBack{
 	private SignUpModelControllerCallBack signUpModelController;
-	private UserDB userdbInstance = UserDB.getInstance();
+	private FlightDB userdbInstance = FlightDB.getInstance();
 	public SignUpModel(SignUpController signUpController) {
 		this.signUpModelController=signUpController;
 	}
