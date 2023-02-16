@@ -11,7 +11,7 @@ public class BookTicketsModel implements BookTicketsModelCallBack{
 	@Override
 	public void addPassengersToDB(String name, int age, char gender,String email,long phoneNo){
 		passengerDB.addPassenger(name, age, gender, phoneNo, email);
-		
+
 	}
 
 }

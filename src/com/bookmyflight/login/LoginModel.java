@@ -1,7 +1,10 @@
 package com.bookmyflight.login;
 
+import com.bookmyflight.repository.UserDB;
+
 public class LoginModel implements LoginModelCallBack{
 	private LoginModelControllerCallBack loginController;
+	private UserDB userDbInstance = UserDB.getInstance();
 	public LoginModel(LoginModelControllerCallBack loginController) {
 		this.loginController = loginController;
 	}
@@ -10,7 +13,7 @@ public class LoginModel implements LoginModelCallBack{
 		if(userid.equals("admin") && password.equals("admin")) {
 			loginController.adminLoginSuccessfull();
 		}
-		else if(userid.equals("user") && password.equals("password")) {
+		else if(userDbInstance.userIdExistInDB(userid)) {
 			loginController.userLoginSuccessfull();
 		}
 		else {

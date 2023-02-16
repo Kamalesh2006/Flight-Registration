@@ -8,7 +8,7 @@ public class LoginView implements LoginViewCallBack{
 	public LoginView() {
 		loginController = new LoginController(this);
 	}
-	public void checkUser() {
+	public void userInput() {
 		System.out.println("Enter the User ID");
 		String userid=scanner.next();
 		System.out.println("Enter the password:");
@@ -28,6 +28,6 @@ public class LoginView implements LoginViewCallBack{
 	@Override
 	public void loginFailed(String userid) {
 		// user login failed
-		System.out.println("User login failed");
+		System.out.println(userid+" doesn't exist. User login failed");
 	}
 }
