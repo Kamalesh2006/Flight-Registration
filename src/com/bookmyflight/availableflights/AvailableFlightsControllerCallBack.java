@@ -2,6 +2,9 @@ package com.bookmyflight.availableflights;
 
 public interface AvailableFlightsControllerCallBack {
 
-	void showFlights();
+	void showFlights(int option);
+
+	void showAvailableDestination();
+
 
 }

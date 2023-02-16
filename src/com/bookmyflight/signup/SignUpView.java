@@ -6,8 +6,14 @@ import com.bookmyflight.login.LoginView;
 
 public class SignUpView implements SignUpViewCallBack{
 	private SignUpControllerCallBack signUpController;
+	private LoginView login;
 	private Scanner scanner = new Scanner(System.in);
 	public SignUpView() {
+		this.login = new LoginView();
+		signUpController = new SignUpController(this);
+	}
+	public SignUpView(LoginView loginView) {
+		this.login = loginView;
 		signUpController = new SignUpController(this);
 	}
 	public void signUpPage() {
@@ -16,13 +22,20 @@ public class SignUpView implements SignUpViewCallBack{
 		String name = scanner.next();
 		System.out.println("Enter your email id");
 		String email = scanner.next();
-		System.out.println("Enter you password");
+		System.out.println("Enter your password");
 		String password = scanner.next();
-		signUpController.addUser(name,email,password);
+		System.out.println("ReEnter your password");
+		String rePassword = scanner.next();
+		signUpController.addUser(name,email,password,rePassword);
 	}
 	@Override
 	public void userAddedSuccessfully(String email) {
 		System.out.println(email+" added successfully to the database");
-		new LoginView().userInput();
+		this.login.userInput();
+	}
+	@Override
+	public void userAdditionFailed(String error) {
+		System.out.println(error);
+		signUpPage();
 	}
 }

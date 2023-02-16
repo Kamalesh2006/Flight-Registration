@@ -2,6 +2,8 @@ package com.bookmyflight.managetickets;
 
 import java.util.Scanner;
 
+import com.bookmyflight.availableflights.AvailableFlightsView;
+
 public class ManageTicketView implements ManageTicketViewCallBack{
 	private Scanner scanner = new Scanner(System.in);
 	private ManageTicketControllerCallBack manageTicketController;
@@ -10,7 +12,7 @@ public class ManageTicketView implements ManageTicketViewCallBack{
 	}
 	public void bookTickets() {
 		System.out.println("Enter 1 to book ticket");
-		System.out.println("Enter 2 to cancel ticket");
+		System.out.println("Enter 2 to cancel booked tickets");
 		int optionChosen = scanner.nextInt();
 		manageTicketController.decideOptions(optionChosen);
 	}
@@ -18,6 +20,7 @@ public class ManageTicketView implements ManageTicketViewCallBack{
 	public void cancelTickets() {
 		System.out.println("Showing Cancel Booked Tickets");
 		//calling cancel ticket module
+		
 		
 	}
 	@Override
@@ -28,5 +31,6 @@ public class ManageTicketView implements ManageTicketViewCallBack{
 	public void showAvailableFlights() {
 		System.out.println("Showing Available flights");
 		//calling available flights module
+		new AvailableFlightsView().showAvailableFlights();
 	}
 }

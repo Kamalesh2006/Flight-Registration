@@ -8,9 +8,11 @@ public class SignUpController implements SignUpControllerCallBack,SignUpModelCon
 		signUpModel = new SignUpModel(this);
 	}
 	@Override
-	public void addUser(String name, String email, String password) {
-		//password encryption
-		signUpModel.addUser(name,email,password);
+	public void addUser(String name, String email, String password,String rePassword) {
+		if(password.equals(rePassword))
+			signUpModel.addUser(name,email,password);
+		else
+			signUpView.userAdditionFailed("Enter the password Correctly");
 	}
 	@Override
 	public void userAddedSuccessfully(String email) {

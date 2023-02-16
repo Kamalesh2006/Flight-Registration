@@ -1,6 +1,6 @@
 package com.bookmyflight;
-import java.util.Scanner;
 
+import java.util.Scanner;
 import com.bookmyflight.login.LoginView;
 import com.bookmyflight.signup.SignUpView;
 

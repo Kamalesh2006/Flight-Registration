@@ -2,6 +2,9 @@ package com.bookmyflight.login;
 
 import java.util.Scanner;
 
+import com.bookmyflight.managetickets.ManageTicketView;
+import com.bookmyflight.signup.SignUpView;
+
 public class LoginView implements LoginViewCallBack{
 	private LoginControllerCallBack loginController;
 	private Scanner scanner = new Scanner(System.in);
@@ -24,10 +27,14 @@ public class LoginView implements LoginViewCallBack{
 	public void userLoginSuccessfull() {
 		// user can book and manage tickets
 		System.out.println("User login successfull");
+		new ManageTicketView().bookTickets();
 	}
 	@Override
 	public void loginFailed(String userid) {
 		// user login failed
 		System.out.println(userid+" doesn't exist. User login failed");
+		System.out.println("Please sign up first");
+		SignUpView signUp = new SignUpView(this);
+		signUp.signUpPage();
 	}
 }
