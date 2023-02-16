@@ -10,8 +10,9 @@ public class Flight {
 	int price;
 	char Class;
 	String date;
+	int seatCapacity;
 	public Flight(int flightNo, String origin, String destination, String departureTime, String arrivalTime,
-			String duration, int price, char class1, String date) {
+			String duration, int price, char class1, String date,int seatCapacity) {
 		super();
 		this.flightNo = flightNo;
 		this.origin = origin;
@@ -22,5 +23,6 @@ public class Flight {
 		this.price = price;
 		Class = class1;
 		this.date = date;
+		this.seatCapacity = seatCapacity;
 	}
 }

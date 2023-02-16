@@ -7,5 +7,9 @@ public class BookTicketsController implements BookTicketsControllerCallBack,Book
 		this.bookTicketsView=bookTicketsView;
 		bookTicketsModel=new BookTicketsModel(this);
 	}
+	@Override
+	public void passengerDetails(String name, int age, char gender, String email,long phoneNo) {
+		bookTicketsModel.addPassengersToDB(name,age,gender,email,phoneNo);
+	}
 
 }

@@ -6,7 +6,7 @@ public class Passenger {
 	char gender;
 	String email;
 	long phoneNo;
-	Passenger(String name, int age, char gender,String email,long phoneNo){
+	public Passenger(String name, int age, char gender,String email,long phoneNo){
 		this.name  = name;
 		this.age = age;
 		this.gender = gender;
