@@ -29,7 +29,8 @@ public class AvailableFlightsController implements AvailableFlightsControllerCal
 	public void retrievedFlightsData(List<Flight> allFlights) {
 		String result ="-----------------------------------------------------";
 		for(Flight f:allFlights) {
-			result = result + "\n"+ f.getDate()+" "+f.getFlightNo()+" from "+f.getOrigin()+" destination "+f.getDestination()+" Dtime "+f.getDepartureTime()+" Atime "+f.getArrivalTime()+"\n "+f.getDuration()+" available Seats "+f.getSeatCapacity();	
+			result = result + "\nDate: "+ f.getDate()+" \t\tFlight ID:"+f.getFlightNo()+"\nBoarding city:"+f.getOrigin()+" \t\tDestination city "+f.getDestination()+"\nDtime "+f.getDepartureTime()+"\t\t\tAtime "+f.getArrivalTime()+"\nJourney Duration:"+f.getDuration()+"\t\tAvailable Seats "+f.getSeatCapacity();	
+			result = result + "\n-----------------------------------------------------";
 		}
 		availableFlightsView.retrievedFlightsDetails(result);
 	}

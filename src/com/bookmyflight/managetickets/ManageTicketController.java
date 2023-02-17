@@ -17,6 +17,8 @@ public class ManageTicketController implements ManageTicketControllerCallBack,Ma
 			manageTicketView.cancelTickets();
 		case 3: 
 			manageTicketView.showAvailableFlights();
+		case 4:
+			manageTicketView.exit();
 		}
 	}
 	@Override

@@ -17,7 +17,16 @@ public interface BookTicketsControllerCallBack {
 	void selectedFlight(int option, List<Flight> flights);
 
 
-	void addPassengersDetails(List<Passenger> passengerList, Flight flight);
+	void addPassengersDetails(List<Passenger> passengerList, Flight flight, char classChosen);
+
+
+	String getSeatforChosenFlight(char classChosen, Flight flight);
+
+
+	String getPriceforChosenFlight(char classChosen, Flight flight);
+
+
+	String getFlightDestinationOnDate(String date);
 
 
 }

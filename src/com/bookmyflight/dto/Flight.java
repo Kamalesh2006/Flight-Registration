@@ -9,7 +9,8 @@ public class Flight {
 	private String duration;
 	private int price;
 	private String date;
-	private int[] seats;
+	private int[] seatsArr;
+	private char classChosen;
 	private int seatCapacity;
 	private int economySeatCount;
 	private int businessSeatCount;
@@ -104,11 +105,11 @@ public class Flight {
 	}
 
 	public int[] getSeats() {
-		return seats;
+		return seatsArr;
 	}
 
-	public void setSeats(int[] seats) {
-		this.seats = seats;
+	public void setSeats(int[] seatsArr) {
+		this.seatsArr = seatsArr;
 	}
 	public int getEconomySeatCount() {
 		return economySeatCount;
@@ -125,4 +126,13 @@ public class Flight {
 		this.businessSeatCount = businessSeatCount;
 	}
 
+	public char getClassChosen() {
+		return classChosen;
+	}
+
+	public void setClassChosen(char classChosen) {
+		this.classChosen = classChosen;
+	}
+
+	
 }

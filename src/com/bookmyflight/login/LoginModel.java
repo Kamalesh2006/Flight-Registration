@@ -1,5 +1,6 @@
 package com.bookmyflight.login;
 
+import com.bookmyflight.dto.User;
 import com.bookmyflight.repository.FlightDB;
 
 public class LoginModel implements LoginModelCallBack{
@@ -10,14 +11,18 @@ public class LoginModel implements LoginModelCallBack{
 	}
 	@Override
 	public void checkUserExistInDB(String userid,String password) {
-		if(userid.equals("admin") && password.equals("admin")) {
-			loginController.adminLoginSuccessfull();
+		User user = userDbInstance.getUser(userid);
+		if(user==null) {
+			loginController.loginFailed(userid);
 		}
-		else if(userDbInstance.userIdExistInDB(userid)) {
+		else if(user.getPassword().equals(password)) {
 			loginController.userLoginSuccessfull();
 		}
+		else if(userid.equals("admin") && password.equals("admin")) {
+			loginController.adminLoginSuccessfull();
+		}
 		else {
-			loginController.loginFailed(userid);
+			loginController.passwordMismatch(userid);
 		}
 	}
 

@@ -13,4 +13,6 @@ public interface BookTicketsModelCallBack {
 
 	void bookFlightWithPassenger(List<Ticket> ticketList);
 
+	List<Flight> getFlightDataOnDate(String date);
+
 }

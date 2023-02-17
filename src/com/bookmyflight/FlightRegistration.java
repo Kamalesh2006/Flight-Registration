@@ -8,9 +8,9 @@ public class FlightRegistration {
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("Welcome to Book My Flight");
-		System.out.println("Press 1 to login");
-		System.out.println("Press 2 to signup");
+		System.out.println("----Welcome to Book My Flight----");
+		System.out.println("Press 1 to Login");
+		System.out.println("Press 2 to SignUp");
 		int option = scanner.nextInt();
 		switch(option) {
 		case 1:
@@ -20,6 +20,7 @@ public class FlightRegistration {
 			new SignUpView().signUpPage();
 			break;
 		}
+		scanner.close();
 	}
 
 }

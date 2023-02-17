@@ -8,4 +8,6 @@ public interface LoginViewCallBack {
 
 	void loginFailed(String userid);
 
+	void loginAgain(String userid);
+
 }

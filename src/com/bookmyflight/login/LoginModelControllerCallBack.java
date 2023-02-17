@@ -8,4 +8,6 @@ public interface LoginModelControllerCallBack {
 
 	void loginFailed(String userid);
 
+	void passwordMismatch(String userid);
+
 }

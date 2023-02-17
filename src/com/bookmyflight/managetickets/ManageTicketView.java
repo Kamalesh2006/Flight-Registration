@@ -16,10 +16,10 @@ public class ManageTicketView implements ManageTicketViewCallBack{
 		manageTicketController = new ManageTicketController(this);
 	}
 	public void bookTickets() {
-		System.out.println("Enter 1 to book ticket");
-		System.out.println("Enter 2 to cancel booked tickets");
-		System.out.println("Enter 3 to display all available flights");
-		System.out.println("Enter 4 to exit application");
+		System.out.println("Press 1 to book ticket");
+		System.out.println("Press 2 to cancel booked tickets");
+		System.out.println("Press 3 to display all available flights");
+		System.out.println("Press 4 to exit application");
 		int optionChosen = scanner.nextInt();
 		manageTicketController.decideOptions(optionChosen);
 	}
@@ -46,5 +46,10 @@ public class ManageTicketView implements ManageTicketViewCallBack{
 	public void callBackToBookTicket() {
 		this.bookTicketsView=new BookTicketsView();
 		bookTicketsView.selectFlightToBook(this);
+	}
+	@Override
+	public void exit() {
+		System.out.println("Thanks for using our application");
+		System.exit(0);
 	}
 }

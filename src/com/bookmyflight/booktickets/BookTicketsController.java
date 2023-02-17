@@ -10,7 +10,7 @@ import com.bookmyflight.dto.Ticket;
 public class BookTicketsController implements BookTicketsControllerCallBack,BookTicketsModelControllerCallBack{
 	private BookTicketsViewCallBack bookTicketsView;
 	private BookTicketsModelCallBack bookTicketsModel;
-	public BookTicketsController(BookTicketsView bookTicketsView) {
+	public BookTicketsController(BookTicketsViewCallBack bookTicketsView) {
 		this.bookTicketsView=bookTicketsView;
 		bookTicketsModel=new BookTicketsModel(this);
 	}
@@ -33,17 +33,28 @@ public class BookTicketsController implements BookTicketsControllerCallBack,Book
 	}
 	@Override
 	public void selectedFlight(int option, List<Flight> flights) {
-		if(option==(flights.size()*2)+1) {
+		if(option==(flights.size())+1) {
 			bookTicketsView.callBackToManageTicket();
 		}
 		bookTicketsView.bookFlight(flights.get(option-1));
 	}
 	@Override
-	public void addPassengersDetails(List<Passenger> passengerList,Flight flight) {
+	public void addPassengersDetails(List<Passenger> passengerList,Flight flight,char classChosen) {
 		List<Ticket> ticketList = new ArrayList<>();
 		for(Passenger p:passengerList) {
-			ticketList.add(new Ticket(p,flight));
 			flight.setSeatCapacity(flight.getSeatCapacity()-1);
+			if(classChosen=='E' && flight.getEconomySeatCount()>0) {
+				flight.setEconomySeatCount(flight.getEconomySeatCount()-1);
+				flight.setClassChosen(classChosen);
+			}
+			else if(classChosen =='B' && flight.getBusinessSeatCount()>0){
+				flight.setBusinessSeatCount(flight.getBusinessSeatCount()-1);
+				flight.setClassChosen(classChosen);
+			}
+			else {
+				bookTicketsView.flightsEmpty("There isn't enough seat in "+classChosen+" class");
+			}
+			ticketList.add(new Ticket(p,flight));
 		}
 		bookTicketsModel.bookFlightWithPassenger(ticketList);
 	}
@@ -51,6 +62,35 @@ public class BookTicketsController implements BookTicketsControllerCallBack,Book
 	@Override
 	public void ticketBookedSuccessfully(List<Ticket> ticketList) {
 		bookTicketsView.ticketBookedSuccessfully(ticketList);
+	}
+
+	@Override
+	public String getSeatforChosenFlight(char classChosen, Flight flight) {
+		if(classChosen=='B')
+			return ""+flight.getBusinessSeatCount();
+		else 
+			return ""+flight.getEconomySeatCount();
+	}
+
+	@Override
+	public String getPriceforChosenFlight(char classChosen, Flight flight) {
+		if(classChosen=='B')
+			return ""+flight.getPrice()*2;
+		else
+			return ""+flight.getPrice();
+	}
+
+	@Override
+	public String getFlightDestinationOnDate(String date) {
+		String result ="";
+		List<Flight> flightData = bookTicketsModel.getFlightDataOnDate(date);
+		if(flightData.isEmpty())
+			return result = "No Flights Found for this date";
+		for(Flight f: flightData) {
+			result = result+"\nFlight Name:"+f.getFlightNo()+"\tBoarding:"+f.getOrigin().toUpperCase()+"\tDestination:"+f.getDestination().toUpperCase();
+		}
+		return result;
+		
 	}
 
 }

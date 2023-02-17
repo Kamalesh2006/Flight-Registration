@@ -21,7 +21,11 @@ public class CancelTicketView implements CancelTicketViewCallBack{
 		System.out.println("Showing booked tickets");
 		int sno=1;
 		for(Ticket ticket:ticketList) {
-			System.out.println("Press "+sno+" "+ticket.getTicketID()+" "+ticket.getPassenger().getName()+" "+ticket.getFlight().getFlightNo()+" "+ticket.getFlight().getDestination());
+			System.out.println("-----------------------------------------------------------------");
+			System.out.println(sno+ ")Ticket ID "+ticket.getTicketID()+"\nFlight: "+ticket.getFlight().getFlightNo()+"\t\tSeat No:"+ticket.getSeatNo());
+			System.out.println("Passenger Name: "+ticket.getPassenger().getName()+"\tPassenger Age: "+ticket.getPassenger().getAge());
+			System.out.println("Boarding date is " + ticket.getFlight().getDate()+"\t Journey duration "+ticket.getFlight().getDuration()+"hrs");
+			System.out.println("-----------------------------------------------------------------");
 			sno++;
 		}
 		System.out.println("Press "+(ticketList.size()+1)+" to go back");

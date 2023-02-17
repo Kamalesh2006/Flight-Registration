@@ -28,6 +28,9 @@ public class CancelTicketController implements CancelTicketControllerCallBack,Ca
 			cancelTicketView.callBackToManageTicket();
 		Ticket ticket = ticketList.remove(option-1);
 		cancelTicketModel.cancelTicket(ticket);
+		if(ticketList.isEmpty()) {
+			cancelTicketView.callBackToManageTicket();
+		}
 		cancelTicketView.bookedTickets(ticketList);
 	}
 

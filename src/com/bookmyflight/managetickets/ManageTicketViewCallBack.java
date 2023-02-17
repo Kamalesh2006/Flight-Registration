@@ -11,4 +11,6 @@ public interface ManageTicketViewCallBack {
 
 	void callBackToBookTicket();
 
+	void exit();
+
 }

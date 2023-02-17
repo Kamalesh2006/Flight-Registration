@@ -19,15 +19,15 @@ public class FlightDB {
 	
 	private FlightDB() {
 		// default available flights in database
-		flightsTable.add(new Flight("Boeing-614", "Chennai", "bengaluru", "01:00pm", "02:00pm", "1:00", 8000,
+		flightsTable.add(new Flight("Boeing-614", "chennai", "bengaluru", "01:00pm", "02:00pm", "1:00", 8000,
 				"01/03/2023", 120));
-		flightsTable.add(new Flight("AirAsia-001", "Chennai", "NewDelhi", "03:00pm", "06:30pm", "3:30", 21600,
+		flightsTable.add(new Flight("AirAsia-001", "chennai", "newdelhi", "03:00pm", "06:30pm", "3:30", 21600,
 				"01/03/2023", 160));
-		flightsTable.add(new Flight("IndiGo-6E-6012", "Bengaluru", "Chennai", "06:00am", "7:00am", "1:00", 7000,
+		flightsTable.add(new Flight("IndiGo-6E-6012", "bengaluru", "chennai", "06:00am", "7:00am", "1:00", 7000,
 				"02/03/2023", 60));
-		flightsTable.add(new Flight("Vistara-UK-866", "Chennai", "Dubai", "7:00pm", "01:00am", "6:00", 33000,
+		flightsTable.add(new Flight("Vistara-UK-866", "chennai", "dubai", "7:00pm", "01:00am", "6:00", 33000,
 				"01/03/2023", 80));
-
+		userTable.add(new User("Kamalesh","kamalesh@gmail.com","kamal"));
 	}
 
 	public static FlightDB getInstance() {
@@ -60,15 +60,13 @@ public class FlightDB {
 	}
 
 	public void addUserToDB(String name, String email, String password) {
-		User user = new User(email);
-		user.setName(name);
-		user.setPassword(password);
+		User user = new User(name,email,password);
 		userTable.add(user);
 	}
 
-	public boolean userIdExistInDB(String userID) {
+	public boolean userIdExistInDB(String userID,String password) {
 		for (int i = 0; i < userTable.size(); i++) {
-			if (userTable.get(i).getEmail().equals(userID)) {
+			if (userTable.get(i).getEmail().equals(userID) && userTable.get(i).getPassword().equals(password)) {
 				return true;
 			}
 		}
@@ -88,8 +86,37 @@ public class FlightDB {
 	}
 
 	public void deleteTicket(Ticket ticket) {
+		char classChosen = ticket.getFlight().getClassChosen();
+		if(classChosen=='B') {
+			ticket.getFlight().setBusinessSeatCount(ticket.getFlight().getBusinessSeatCount()+1);
+		}
+		else {
+			ticket.getFlight().setEconomySeatCount(ticket.getFlight().getEconomySeatCount()+1);
+		}
+		int seatNo= ticket.getSeatNoInt();
+		int[] seatArr = ticket.getFlight().getSeats();
+		seatArr[seatNo-1]=0;
+		ticket.getFlight().setSeats(seatArr);
 		ticket.getFlight().setSeatCapacity(ticket.getFlight().getSeatCapacity()+1);
 		ticketTable.remove(ticket);
+	}
+
+	public List<Flight> getFlightDatabyDate(String date) {
+		List<Flight> result = new ArrayList<>();
+		for(Flight f: flightsTable) {
+			if(f.getDate().equals(date)) {
+				result.add(f);
+			}
+		}
+		return result;
+	}
+
+	public User getUser(String userid) {
+		for(User user: userTable) {
+			if(user.getEmail().equals(userid))
+				return user;
+		}
+		return null;
 	}
 
 }

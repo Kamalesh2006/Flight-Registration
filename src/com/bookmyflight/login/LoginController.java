@@ -23,4 +23,8 @@ public class LoginController implements LoginControllerCallBack,LoginModelContro
 	public void loginFailed(String userid) {
 		loginView.loginFailed(userid);
 	}
+	@Override
+	public void passwordMismatch(String userid) {
+		loginView.loginAgain(userid);
+	}
 }

@@ -28,6 +28,7 @@ public class AvailableFlightsView implements AvailableFlightsViewCallBack {
 	public void retrievedFlightsDetails(String flightsData) {
 		System.out.println("Available flights are listed below:");
 		System.out.println(flightsData);
+		showAvailableFlights(manageTicketView);
 	}
 	@Override
 	public void showDestination(Set<String> destinationCollections) {

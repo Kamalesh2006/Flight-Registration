@@ -5,12 +5,32 @@ public class Ticket {
 	private Flight flight;
 	private String ticketID;
 	private String seatNo;
+	private int seatNoInt;
 	
+	public String getSeatNo() {
+		return seatNo;
+	}
+	public void setSeatNo(Flight flight,char classChosen) {
+		int i = classChosen=='B'?0:flight.getBusinessSeatCount();
+		int length = flight.getSeats().length;
+		int[] seats = flight.getSeats();
+		while(i<length) {
+			if(seats[i]==0) {
+				seatNo = ""+classChosen+(i+1);
+				this.seatNoInt = i+1;
+				seats[i]=1;
+				break;
+			}
+			i++;
+		}
+		
+	}
 	public Ticket(Passenger passenger, Flight flight) {
 		super();
 		this.passenger = passenger;
 		this.flight = flight;
-		this.setTicketID(passenger.getEmail()+flight.getFlightNo());
+		this.setSeatNo(flight,flight.getClassChosen());
+		this.setTicketID(passenger.getEmail().substring(0,4)+flight.getFlightNo().substring(0,3)+getSeatNo());
 	}
 	public Passenger getPassenger() {
 		return passenger;
@@ -29,6 +49,9 @@ public class Ticket {
 	}
 	private void setTicketID(String ticketID) {
 		this.ticketID = ticketID;
+	}
+	public int getSeatNoInt() {
+		return seatNoInt;
 	}
 	
 }

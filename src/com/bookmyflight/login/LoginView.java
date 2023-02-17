@@ -38,4 +38,9 @@ public class LoginView implements LoginViewCallBack{
 		SignUpView signUp = new SignUpView(this);
 		signUp.signUpPage();
 	}
+	@Override
+	public void loginAgain(String userid) {
+		System.out.println("Password is wrong");
+		userInput();
+	}
 }

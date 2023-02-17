@@ -23,5 +23,9 @@ public class BookTicketsModel implements BookTicketsModelCallBack{
 		flightDB.addTickets(ticketList);
 		bookTicketsModelControllerCallBack.ticketBookedSuccessfully(ticketList);
 	}
+	@Override
+	public List<Flight> getFlightDataOnDate(String date) {
+		return flightDB.getFlightDatabyDate(date);
+	}
 
 }
