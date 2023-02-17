@@ -14,10 +14,12 @@ public class FlightRegistration {
 		int option = scanner.nextInt();
 		switch(option) {
 		case 1:
-			new LoginView().userInput();
+			LoginView loginView = new LoginView();
+			loginView.userInput();
 			break;
 		case 2:
-			new SignUpView().signUpPage();
+			SignUpView signUpView = new SignUpView();
+			signUpView.signUpPage();
 			break;
 		}
 		scanner.close();
