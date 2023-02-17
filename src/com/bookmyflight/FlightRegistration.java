@@ -7,6 +7,7 @@ import com.bookmyflight.signup.SignUpView;
 public class FlightRegistration {
 
 	public static void main(String[] args) {
+		//Flight registration application
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("----Welcome to Book My Flight----");
 		System.out.println("Press 1 to Login");
