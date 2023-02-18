@@ -12,4 +12,6 @@ public interface CancelTicketViewCallBack {
 
 	void noTicketsBooked(String string);
 
+	void successfullyCancelled();
+
 }

@@ -2,6 +2,7 @@ package com.bookmyflight.login;
 
 import java.util.Scanner;
 
+import com.bookmyflight.admin.AdminView;
 import com.bookmyflight.managetickets.ManageTicketView;
 import com.bookmyflight.signup.SignUpView;
 
@@ -22,6 +23,8 @@ public class LoginView implements LoginViewCallBack{
 	public void adminLoginSuccessfull() {
 		//admin specific calls (add flights delete flights)
 		System.out.println("Admin login successfull");
+		AdminView admin = new AdminView();
+		admin.adminAccess(this);;
 	}
 	@Override
 	public void userLoginSuccessfull() {

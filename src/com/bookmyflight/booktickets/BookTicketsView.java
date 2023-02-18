@@ -1,18 +1,21 @@
 package com.bookmyflight.booktickets;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.bookmyflight.availableflights.AvailableFlightsView;
 import com.bookmyflight.dto.Flight;
 import com.bookmyflight.dto.Passenger;
 import com.bookmyflight.dto.Ticket;
 import com.bookmyflight.managetickets.ManageTicketView;
+import com.bookmyflight.tatkalbooking.TatkalView;
 
 public class BookTicketsView implements BookTicketsViewCallBack {
 	private Scanner scanner = new Scanner(System.in);
 	private BookTicketsControllerCallBack bookTicketsController;
+	private TatkalView tatkalView;
 	private ManageTicketView manageTicketView;
 	public BookTicketsView() {
 		bookTicketsController = new BookTicketsController(this);
@@ -20,15 +23,17 @@ public class BookTicketsView implements BookTicketsViewCallBack {
 
 	public void selectFlightToBook(ManageTicketView manageTicketView) {
 		this.manageTicketView=manageTicketView;
-		System.out.println("Enter your Journey date:");
-		String date = scanner.next();
+		System.out.println("Enter your Journey date (dd/mm/yyyy):");
+		String dateString = scanner.next();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+		LocalDate date = LocalDate.parse(dateString, formatter);
 		String result = bookTicketsController.getFlightDestinationOnDate(date);
 		System.out.println(result);
 		System.out.println("Enter your Departure city");
 		String departureCity = scanner.next().toLowerCase();
 		System.out.println("Enter your Destination city");
 		String destinationCity = scanner.next().toLowerCase();
-		bookTicketsController.showAvailableFlights(departureCity, destinationCity, date);
+		bookTicketsController.showAvailableFlightsOnDate(departureCity, destinationCity, date);
 	}
 
 	@Override
@@ -54,7 +59,6 @@ public class BookTicketsView implements BookTicketsViewCallBack {
 		List<Passenger> passengerList = new ArrayList<>();
 		System.out.println("Enter which class you want to book (B/E)");
 		char classChosen = scanner.next().charAt(0);
-		System.out.println("Available seats for class is "+bookTicketsController.getSeatforChosenFlight(classChosen,flight)+" and price is "+bookTicketsController.getPriceforChosenFlight(classChosen,flight));
 		System.out.println("Enter no of passengers you want to add:");
 		int size = scanner.nextInt();
 		while (size-->0) {
@@ -70,12 +74,13 @@ public class BookTicketsView implements BookTicketsViewCallBack {
 			long phoneNo = scanner.nextLong();
 			passengerList.add(new Passenger(name, age, gender, email, phoneNo));
 		}
+		System.out.println("Available seats for class is "+bookTicketsController.getSeatforChosenFlight(classChosen,flight)+" and price is "+bookTicketsController.getPriceforChosenFlight(classChosen,flight));
 		bookTicketsController.addPassengersDetails(passengerList,flight,classChosen);
 	}
 
 	@Override
 	public void flightsEmpty(String error) {
-		System.out.println(error);
+		System.err.println(error);
 		selectFlightToBook(manageTicketView);
 	}
 
@@ -95,5 +100,11 @@ public class BookTicketsView implements BookTicketsViewCallBack {
 	@Override
 	public void callBackToManageTicket() {
 		manageTicketView.bookTickets();
+	}
+	@Override
+	public void callToTatkalTicket(String msg) {
+		System.out.println(msg);
+		tatkalView = new TatkalView();
+		tatkalView.showTatkal(this);
 	}
 }

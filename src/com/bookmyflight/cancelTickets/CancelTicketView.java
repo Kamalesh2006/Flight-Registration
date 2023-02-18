@@ -42,4 +42,9 @@ public class CancelTicketView implements CancelTicketViewCallBack{
 		System.out.println(error);
 		callBackToManageTicket();
 	}
+	@Override
+	public void successfullyCancelled() {
+		System.out.println("Ticket Successfully cancelled");
+		showTicketsToCancel(manageTicketView);
+	}
 }

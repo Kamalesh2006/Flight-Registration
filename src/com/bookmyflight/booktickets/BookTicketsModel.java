@@ -1,5 +1,7 @@
 package com.bookmyflight.booktickets;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.bookmyflight.dto.Flight;
@@ -14,9 +16,14 @@ public class BookTicketsModel implements BookTicketsModelCallBack{
 		this.bookTicketsModelControllerCallBack = bookTicketsController;
 	}
 	@Override
-	public void showFlightsOnDate(String departureCity, String destinationCity,String date) {
-		List<Flight> result = flightDB.getFlightsOnDate(departureCity,destinationCity,date);
-		bookTicketsModelControllerCallBack.flightsOnDate(result);
+	public void showFlightsOnDate(String departureCity, String destinationCity,LocalDate date) {
+		List<Flight> flightList = flightDB.getFlightsInDB();
+		List<Flight> result  = new ArrayList<>();
+		for(Flight f: flightList) {
+			if (f.getDate().equals(date) && f.getDestination().equals(destinationCity) && f.getOrigin().equals(departureCity))
+				result.add(f);
+		}
+		bookTicketsModelControllerCallBack.flightsOnDate(result,departureCity,destinationCity);
 	}
 	@Override
 	public void bookFlightWithPassenger(List<Ticket> ticketList) {
@@ -24,8 +31,15 @@ public class BookTicketsModel implements BookTicketsModelCallBack{
 		bookTicketsModelControllerCallBack.ticketBookedSuccessfully(ticketList);
 	}
 	@Override
-	public List<Flight> getFlightDataOnDate(String date) {
-		return flightDB.getFlightDatabyDate(date);
+	public List<Flight> getFlightDataOnDate(LocalDate date) {
+		List<Flight> flightList = flightDB.getFlightsInDB();
+		List<Flight> result  = new ArrayList<>();
+		for(Flight f: flightList) {
+			if(f.getDate().isEqual(date)) {
+				result.add(f);
+			}
+		}
+		return result;
 	}
 
 }

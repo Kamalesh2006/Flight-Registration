@@ -1,5 +1,6 @@
 package com.bookmyflight.booktickets;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +17,11 @@ public class BookTicketsController implements BookTicketsControllerCallBack,Book
 	}
 	
 	@Override
-	public void showAvailableFlightsOnDate(String departureCity,String destinationCity,String date) {
+	public void showAvailableFlightsOnDate(String departureCity,String destinationCity,LocalDate date) {
 		bookTicketsModel.showFlightsOnDate(departureCity,destinationCity,date);
 	}
 	@Override
-	public void flightsOnDate(List<Flight> result) {
+	public void flightsOnDate(List<Flight> result,String departureCity,String destinationCity) {
 		if(!result.isEmpty())
 			bookTicketsView.printFlights(result);
 		else {
@@ -28,13 +29,13 @@ public class BookTicketsController implements BookTicketsControllerCallBack,Book
 		}
 	}
 	@Override
-	public void showAvailableFlights(String departureCity, String destinationCity,String date) {
-		bookTicketsModel.showFlightsOnDate(departureCity, destinationCity,date);
-	}
-	@Override
 	public void selectedFlight(int option, List<Flight> flights) {
 		if(option==(flights.size())+1) {
 			bookTicketsView.callBackToManageTicket();
+		}
+		Flight flight = flights.get(option-1);
+		if(flight.getDate().isEqual(LocalDate.now().plusDays(1))) {
+			bookTicketsView.callToTatkalTicket("You have Opt for emergency ticket");
 		}
 		bookTicketsView.bookFlight(flights.get(option-1));
 	}
@@ -81,11 +82,15 @@ public class BookTicketsController implements BookTicketsControllerCallBack,Book
 	}
 
 	@Override
-	public String getFlightDestinationOnDate(String date) {
+	public String getFlightDestinationOnDate(LocalDate date) {
+		if(date.isEqual(LocalDate.now().plusDays(1))) {
+			bookTicketsView.callToTatkalTicket("You have chosen for tatkal booking");
+		}
 		String result ="";
 		List<Flight> flightData = bookTicketsModel.getFlightDataOnDate(date);
 		if(flightData.isEmpty())
 			return result = "No Flights Found for this date";
+		result = "Available Flights on the date:"+date+"\n";
 		for(Flight f: flightData) {
 			result = result+"\nFlight Name:"+f.getFlightNo()+"\tBoarding:"+f.getOrigin().toUpperCase()+"\tDestination:"+f.getDestination().toUpperCase();
 		}

@@ -7,7 +7,7 @@ import com.bookmyflight.dto.Ticket;
 
 public interface BookTicketsModelControllerCallBack {
 
-	void flightsOnDate(List<Flight> result);
+	void flightsOnDate(List<Flight> result, String departureCity, String destinationCity);
 
 	void ticketBookedSuccessfully(List<Ticket> ticketList);
 

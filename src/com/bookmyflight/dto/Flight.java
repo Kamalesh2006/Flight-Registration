@@ -1,22 +1,27 @@
 package com.bookmyflight.dto;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Flight {
 	private String flightNo;
 	private String origin;
 	private String destination;
-	private String departureTime;
-	private String ArrivalTime;
+	private LocalTime departureTime;
+	private LocalTime ArrivalTime;
 	private String duration;
 	private int price;
-	private String date;
+	private LocalDate date;
 	private int[] seatsArr;
 	private char classChosen;
 	private int seatCapacity;
 	private int economySeatCount;
 	private int businessSeatCount;
+	private int tatkalSeatCount;
 	
-	public Flight(String flightNo, String origin, String destination, String departureTime, String arrivalTime,
-			String duration, int price, String date, int seatCapacity) {
+	
+	public Flight(String flightNo, String origin, String destination,LocalTime departureTime,LocalTime arrivalTime,
+			String duration, int price, LocalDate date, int seatCapacity) {
 		super();
 		this.flightNo = flightNo;
 		this.origin = origin;
@@ -28,7 +33,8 @@ public class Flight {
 		this.date = date;
 		this.seatCapacity = seatCapacity;
 		setSeats(new int[seatCapacity]);
-		this.businessSeatCount = seatCapacity/3;
+		this.tatkalSeatCount = (int)(seatCapacity*0.15);
+		this.businessSeatCount = (seatCapacity/3)-tatkalSeatCount;
 		economySeatCount = (seatCapacity-businessSeatCount);
 	}
 
@@ -56,19 +62,19 @@ public class Flight {
 		this.destination = destination;
 	}
 
-	public String getDepartureTime() {
+	public LocalTime getDepartureTime() {
 		return departureTime;
 	}
 
-	public void setDepartureTime(String departureTime) {
+	public void setDepartureTime(LocalTime departureTime) {
 		this.departureTime = departureTime;
 	}
 
-	public String getArrivalTime() {
+	public LocalTime getArrivalTime() {
 		return ArrivalTime;
 	}
 
-	public void setArrivalTime(String arrivalTime) {
+	public void setArrivalTime(LocalTime arrivalTime) {
 		ArrivalTime = arrivalTime;
 	}
 
@@ -88,11 +94,11 @@ public class Flight {
 		this.price = price;
 	}
 
-	public String getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
@@ -132,6 +138,13 @@ public class Flight {
 
 	public void setClassChosen(char classChosen) {
 		this.classChosen = classChosen;
+	}
+	public int getTatkalSeatCount() {
+		return tatkalSeatCount;
+	}
+
+	public void setTatkalSeatCount(int tatkalSeatCount) {
+		this.tatkalSeatCount = tatkalSeatCount;
 	}
 
 	

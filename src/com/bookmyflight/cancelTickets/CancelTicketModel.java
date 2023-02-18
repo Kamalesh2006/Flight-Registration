@@ -18,7 +18,21 @@ public class CancelTicketModel implements CancelTicketModelCallBack {
 	}
 	@Override
 	public void cancelTicket(Ticket ticket) {
-		flightInstance.deleteTicket(ticket);
+		List<Ticket> ticketTable = flightInstance.getTickets();
+		char classChosen = ticket.getFlight().getClassChosen();
+		if(classChosen=='B') {
+			ticket.getFlight().setBusinessSeatCount(ticket.getFlight().getBusinessSeatCount()+1);
+		}
+		else {
+			ticket.getFlight().setEconomySeatCount(ticket.getFlight().getEconomySeatCount()+1);
+		}
+		int seatNo= ticket.getSeatNoInt();
+		int[] seatArr = ticket.getFlight().getSeats();
+		seatArr[seatNo-1]=0;
+		ticket.getFlight().setSeats(seatArr);
+		ticket.getFlight().setSeatCapacity(ticket.getFlight().getSeatCapacity()+1);
+		ticketTable.remove(ticket);
+		cancelTicketController.cancelledSuccessfully();
 	}
 
 }

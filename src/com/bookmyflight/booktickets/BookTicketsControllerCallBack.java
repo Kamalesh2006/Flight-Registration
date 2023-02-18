@@ -1,5 +1,6 @@
 package com.bookmyflight.booktickets;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.bookmyflight.dto.Flight;
@@ -7,11 +8,8 @@ import com.bookmyflight.dto.Passenger;
 
 public interface BookTicketsControllerCallBack {
 
-	
-	void showAvailableFlights(String date, String departureCity, String destinationCity);
 
-
-	void showAvailableFlightsOnDate(String departureCity, String destinationCity,String date);
+	void showAvailableFlightsOnDate(String departureCity, String destinationCity,LocalDate date);
 
 
 	void selectedFlight(int option, List<Flight> flights);
@@ -26,7 +24,8 @@ public interface BookTicketsControllerCallBack {
 	String getPriceforChosenFlight(char classChosen, Flight flight);
 
 
-	String getFlightDestinationOnDate(String date);
+	String getFlightDestinationOnDate(LocalDate date);
+
 
 
 }

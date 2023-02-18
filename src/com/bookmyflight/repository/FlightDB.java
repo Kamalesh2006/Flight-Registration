@@ -1,5 +1,7 @@
 package com.bookmyflight.repository;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -19,14 +21,16 @@ public class FlightDB {
 	
 	private FlightDB() {
 		// default available flights in database
-		flightsTable.add(new Flight("Boeing-614", "chennai", "bengaluru", "01:00pm", "02:00pm", "1:00", 8000,
-				"01/03/2023", 120));
-		flightsTable.add(new Flight("AirAsia-001", "chennai", "newdelhi", "03:00pm", "06:30pm", "3:30", 21600,
-				"01/03/2023", 160));
-		flightsTable.add(new Flight("IndiGo-6E-6012", "bengaluru", "chennai", "06:00am", "7:00am", "1:00", 7000,
-				"02/03/2023", 60));
-		flightsTable.add(new Flight("Vistara-UK-866", "chennai", "dubai", "7:00pm", "01:00am", "6:00", 33000,
-				"01/03/2023", 80));
+		flightsTable.add(new Flight("Boeing-614", "chennai", "bengaluru", LocalTime.of(13, 0), LocalTime.of(14,00), "1:00", 8000,
+				LocalDate.of(2023, 02, 20), 120));
+		flightsTable.add(new Flight("AirAsia-001", "chennai", "newdelhi", LocalTime.of(15, 0), LocalTime.of(18, 30), "3:30", 21600,
+				LocalDate.of(2023, 02, 19), 160));
+		flightsTable.add(new Flight("IndiGo-6E-6012", "bengaluru", "chennai",LocalTime.of(6, 0), LocalTime.of(7, 0),"1:00", 7000,
+				LocalDate.of(2023, 02, 19), 60));
+		flightsTable.add(new Flight("Vistara-UK-866", "chennai", "dubai",LocalTime.of(17, 0), LocalTime.of(23, 0),"6:00", 33000,
+				LocalDate.of(2023, 03, 01), 80));
+		
+		//default available user in database
 		userTable.add(new User("Kamalesh","kamalesh@gmail.com","kamal"));
 	}
 
@@ -45,16 +49,6 @@ public class FlightDB {
 		Set<String> result = new HashSet<>();
 		for (Flight f : flightsTable) {
 			result.add(f.getDestination());
-		}
-		return result;
-	}
-
-	public List<Flight> getFlightsOnDate(String departureCity, String destinationCity, String date) {
-		List<Flight> result = new ArrayList<>();
-		for (Flight f : flightsTable) {
-			if (f.getDate().equals(date) && f.getDestination().equals(destinationCity)
-					&& f.getOrigin().equals(departureCity))
-				result.add(f);
 		}
 		return result;
 	}
@@ -85,31 +79,6 @@ public class FlightDB {
 		return ticketTable;
 	}
 
-	public void deleteTicket(Ticket ticket) {
-		char classChosen = ticket.getFlight().getClassChosen();
-		if(classChosen=='B') {
-			ticket.getFlight().setBusinessSeatCount(ticket.getFlight().getBusinessSeatCount()+1);
-		}
-		else {
-			ticket.getFlight().setEconomySeatCount(ticket.getFlight().getEconomySeatCount()+1);
-		}
-		int seatNo= ticket.getSeatNoInt();
-		int[] seatArr = ticket.getFlight().getSeats();
-		seatArr[seatNo-1]=0;
-		ticket.getFlight().setSeats(seatArr);
-		ticket.getFlight().setSeatCapacity(ticket.getFlight().getSeatCapacity()+1);
-		ticketTable.remove(ticket);
-	}
-
-	public List<Flight> getFlightDatabyDate(String date) {
-		List<Flight> result = new ArrayList<>();
-		for(Flight f: flightsTable) {
-			if(f.getDate().equals(date)) {
-				result.add(f);
-			}
-		}
-		return result;
-	}
 
 	public User getUser(String userid) {
 		for(User user: userTable) {
@@ -117,6 +86,14 @@ public class FlightDB {
 				return user;
 		}
 		return null;
+	}
+
+	public void addFlight(Flight flight) {
+		this.flightsTable.add(flight);
+	}
+
+	public void removeFlight(Flight f) {
+		flightsTable.remove(f);
 	}
 
 }

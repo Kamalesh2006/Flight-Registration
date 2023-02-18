@@ -33,5 +33,9 @@ public class CancelTicketController implements CancelTicketControllerCallBack,Ca
 		}
 		cancelTicketView.bookedTickets(ticketList);
 	}
+	@Override
+	public void cancelledSuccessfully() {
+		cancelTicketView.successfullyCancelled();
+	}
 
 }

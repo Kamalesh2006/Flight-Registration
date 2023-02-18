@@ -8,4 +8,6 @@ public interface CancelTicketModelControllerCallBack {
 
 	void retrievedBookedTickets(List<Ticket> ticketList);
 
+	void cancelledSuccessfully();
+
 }
