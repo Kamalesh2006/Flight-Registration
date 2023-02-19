@@ -24,9 +24,9 @@ public class FlightDB {
 		flightsTable.add(new Flight("Boeing-614", "chennai", "bengaluru", LocalTime.of(13, 0), LocalTime.of(14,00), "1:00", 8000,
 				LocalDate.of(2023, 02, 20), 120));
 		flightsTable.add(new Flight("AirAsia-001", "chennai", "newdelhi", LocalTime.of(15, 0), LocalTime.of(18, 30), "3:30", 21600,
-				LocalDate.of(2023, 02, 19), 160));
+				LocalDate.of(2023, 02, 21), 160));
 		flightsTable.add(new Flight("IndiGo-6E-6012", "bengaluru", "chennai",LocalTime.of(6, 0), LocalTime.of(7, 0),"1:00", 7000,
-				LocalDate.of(2023, 02, 19), 60));
+				LocalDate.of(2023, 02, 20), 60));
 		flightsTable.add(new Flight("Vistara-UK-866", "chennai", "dubai",LocalTime.of(17, 0), LocalTime.of(23, 0),"6:00", 33000,
 				LocalDate.of(2023, 03, 01), 80));
 		
