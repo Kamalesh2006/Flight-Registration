@@ -11,7 +11,7 @@ public class LoginModel implements LoginModelCallBack{
 	}
 	@Override
 	public void checkUserExistInDB(String userid,String password) {
-		if(userid.equals("admin") && password.equals("admin")) {
+		if(userid.equals("admin@gmail.com") && password.equals("admin")) {
 			loginController.adminLoginSuccessfull();
 		}
 		
