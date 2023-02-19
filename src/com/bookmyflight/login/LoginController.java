@@ -1,5 +1,8 @@
 package com.bookmyflight.login;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class LoginController implements LoginControllerCallBack,LoginModelControllerCallBack {
 	private LoginViewCallBack loginView;
 	private LoginModelCallBack loginModel;
@@ -9,7 +12,14 @@ public class LoginController implements LoginControllerCallBack,LoginModelContro
 	}
 	@Override
 	public void checkUserExist(String userid,String password) {
-		loginModel.checkUserExistInDB(userid,password);
+		Pattern p = Pattern.compile("[a-zA-Z0-9][a-zA-Z0-9]*@[a-zA-Z0-9]+[.][com]");
+		Matcher m = p.matcher(userid);
+		if(m.find()) {
+			loginModel.checkUserExistInDB(userid,password);			
+		}else {
+			loginView.wrongInput("Pls enter valid email id");
+		}
+		
 	}
 	@Override
 	public void adminLoginSuccessfull() {

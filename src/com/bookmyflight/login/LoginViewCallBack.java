@@ -10,4 +10,6 @@ public interface LoginViewCallBack {
 
 	void loginAgain(String userid);
 
+	void wrongInput(String string);
+
 }

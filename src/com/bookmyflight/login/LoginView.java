@@ -13,7 +13,7 @@ public class LoginView implements LoginViewCallBack{
 		loginController = new LoginController(this);
 	}
 	public void userInput() {
-		System.out.println("Enter the User ID");
+		System.out.println("Enter the User ID (Email ID):");
 		String userid=scanner.next();
 		System.out.println("Enter the password:");
 		String password = scanner.next();
@@ -44,6 +44,11 @@ public class LoginView implements LoginViewCallBack{
 	@Override
 	public void loginAgain(String userid) {
 		System.out.println("Password is wrong");
+		userInput();
+	}
+	@Override
+	public void wrongInput(String error) {
+		System.err.println(error);
 		userInput();
 	}
 }
